@@ -1,0 +1,14 @@
+.git
+.env
+.turbo
+
+dist
+node_modules
+
+apps/client/.turbo
+apps/client/dist
+apps/client/node_modules
+
+apps/server/.turbo
+apps/server/dist
+apps/server/node_modules

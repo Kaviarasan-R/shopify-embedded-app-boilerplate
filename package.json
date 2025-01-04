@@ -1,0 +1,25 @@
+{
+  "name": "shopify-embedded-app-boilerplate",
+  "version": "1.0.0",
+  "description": "Shopify embedded app boilerplate",
+  "author": "Kaviarasan-R",
+  "private": true,
+  "packageManager": "npm@11.0.0",
+  "engines": {
+    "node": "22.12.0",
+    "npm": "11.0.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "node dist/server/main"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "workspaces": [
+    "apps/*"
+  ]
+}
