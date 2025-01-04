@@ -10,6 +10,10 @@
     "npm": "11.0.0"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kaviarasan-R/shopify-embedded-app-boilerplate.git"
+  },
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
