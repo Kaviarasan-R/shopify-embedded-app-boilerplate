@@ -66,13 +66,6 @@ export default defineConfig({
   build: {
     outDir: "../../dist/client",
   },
-  define: {
-    "process.env": {
-      CLIENT_PORT: process.env.CLIENT_PORT,
-      SERVER_PORT: process.env.SERVER_PORT,
-      HOST_URL: process.env.HOST_URL,
-    },
-  },
   resolve: {
     alias: {
       "@": "/src",

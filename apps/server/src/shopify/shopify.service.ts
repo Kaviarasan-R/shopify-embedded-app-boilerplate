@@ -1,6 +1,7 @@
 import {
   AUTH_CALLBACK_PATH,
   AUTH_PATH,
+  EXITIFRAME_PATH,
   WEBHOOKS_PATH,
 } from '@/utils/constants';
 import { Inject, Injectable } from '@nestjs/common';
@@ -52,7 +53,7 @@ export class ShopifyService {
           path: WEBHOOKS_PATH,
         },
         useOnlineTokens: true,
-        exitIframePath: '/exitframe',
+        exitIframePath: EXITIFRAME_PATH,
       });
     }
   }

@@ -5,8 +5,14 @@ import { join } from 'path';
 import { ShopifyModule } from './shopify/shopify.module';
 import { WebhooksModule } from './webhooks/webhooks.module';
 import { ShopifyCallBackMiddleware } from './middleware/shopify-auth-callback.middleware';
-import { AUTH_CALLBACK_PATH } from './utils/constants';
+import {
+  AUTH_CALLBACK_PATH,
+  AUTH_PATH,
+  EXITIFRAME_PATH,
+  WEBHOOKS_PATH,
+} from './utils/constants';
 import { ShopifyEnsureMiddleware } from './middleware/shopify-ensure.middleware';
+import { ShopifyCSPMiddleware } from './middleware/shopify-csp.middleware';
 // import { ShopifyValidateAuthenticatedSessionMiddleware } from './middleware/shopify-validate-session.middleware';
 
 @Module({
@@ -24,14 +30,27 @@ import { ShopifyEnsureMiddleware } from './middleware/shopify-ensure.middleware'
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(ShopifyCSPMiddleware)
+      .exclude(
+        AUTH_PATH,
+        AUTH_CALLBACK_PATH,
+        WEBHOOKS_PATH,
+        '/api/auth/(.*)',
+        '/api/auth/callback/(.*)',
+        '/api/webhooks/(.*)',
+      )
+      .forRoutes('*');
     consumer.apply(ShopifyCallBackMiddleware).forRoutes(AUTH_CALLBACK_PATH);
     consumer
       .apply(ShopifyEnsureMiddleware)
       .exclude(
-        { path: '/exitframe', method: RequestMethod.GET },
+        { path: EXITIFRAME_PATH, method: RequestMethod.GET },
         { path: AUTH_CALLBACK_PATH, method: RequestMethod.GET },
       )
       .forRoutes(AppController);
-    // consumer.apply(ShopifyValidateAuthenticatedSessionMiddleware).forRoutes();
+    /*     consumer
+      .apply(ShopifyValidateAuthenticatedSessionMiddleware)
+      .forRoutes("*"); */
   }
 }

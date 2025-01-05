@@ -14,7 +14,7 @@ export class AppController {
   private readonly STATIC_PATH =
     this.configService.get<string>('NODE_ENV') === 'prod'
       ? join(__dirname, '../', 'client')
-      : join(__dirname, '../apps/', 'client');
+      : join(__dirname, '../../apps/', 'client');
 
   constructor(
     private readonly configService: ConfigService,
