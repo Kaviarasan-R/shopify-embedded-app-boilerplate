@@ -20,6 +20,9 @@
     "start": "node dist/server/main"
   },
   "devDependencies": {
+    "@shopify/app": "^3.58.2",
+    "@shopify/cli": "^3.72.2",
+    "@shopify/cli-kit": "^3.72.2",
     "turbo": "^2.3.3",
     "typescript": "^5.7.2"
   },
