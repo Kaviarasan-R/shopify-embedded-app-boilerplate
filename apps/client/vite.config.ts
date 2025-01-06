@@ -12,30 +12,6 @@ const proxyOptions = {
   ws: false,
 };
 
-const host = process.env.SHOPIFY_APP_URL
-  ? process.env.SHOPIFY_APP_URL?.replace(/https?:\/\//, "")
-  : "localhost";
-
-let hmrConfig: object;
-
-if (host === "localhost") {
-  hmrConfig = {
-    protocol: "ws",
-    host: "localhost",
-    port: 64999,
-    clientPort: 64999,
-    serverInitialState: () => null,
-  };
-} else {
-  hmrConfig = {
-    protocol: "wss",
-    host: host,
-    port: parseInt(process.env.CLIENT_PORT),
-    clientPort: 443,
-    serverInitialState: () => null,
-  };
-}
-
 const isNgrokUrl = process.env.SHOPIFY_APP_URL?.includes("ngrok");
 
 export default defineConfig({
@@ -53,7 +29,6 @@ export default defineConfig({
   server: {
     host: "localhost",
     port: process.env.CLIENT_PORT,
-    hmr: hmrConfig,
     proxy: {
       ...(isNgrokUrl
         ? { "^/(/|(\\?.*)?$)": proxyOptions }

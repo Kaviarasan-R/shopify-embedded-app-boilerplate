@@ -13,7 +13,9 @@ import {
 } from './utils/constants';
 import { ShopifyEnsureMiddleware } from './middleware/shopify-ensure.middleware';
 import { ShopifyCSPMiddleware } from './middleware/shopify-csp.middleware';
-// import { ShopifyValidateAuthenticatedSessionMiddleware } from './middleware/shopify-validate-session.middleware';
+import { ShopifyValidateAuthenticatedSessionMiddleware } from './middleware/shopify-validate-session.middleware';
+import { GqlModule } from './gql/gql.module';
+import { GqlController } from './gql/gql.controller';
 
 @Module({
   imports: [
@@ -24,6 +26,7 @@ import { ShopifyCSPMiddleware } from './middleware/shopify-csp.middleware';
     }),
     ShopifyModule,
     WebhooksModule,
+    GqlModule,
   ],
   controllers: [AppController],
   providers: [],
@@ -49,8 +52,8 @@ export class AppModule {
         { path: AUTH_CALLBACK_PATH, method: RequestMethod.GET },
       )
       .forRoutes(AppController);
-    /*     consumer
+    consumer
       .apply(ShopifyValidateAuthenticatedSessionMiddleware)
-      .forRoutes("*"); */
+      .forRoutes(GqlController);
   }
 }
