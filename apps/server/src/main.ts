@@ -6,6 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ShopifyService } from './shopify/shopify.service';
 import { WebhooksService } from './webhooks/webhooks.service';
 import { AUTH_PATH, WEBHOOKS_PATH } from './utils/constants';
+import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +20,14 @@ async function bootstrap() {
   });
 
   const httpAdapter = app.getHttpAdapter();
+
+  const STATIC_PATH =
+    process.env.NODE_ENV === 'prod'
+      ? join(__dirname, '../', 'client')
+      : join(__dirname, '../../apps/', 'client');
+
+  httpAdapter.useStaticAssets(STATIC_PATH, { index: false });
+
   const shopifyService = app.get(ShopifyService);
   const webhookHandlers = app.get(WebhooksService).webhookHandlers;
 
