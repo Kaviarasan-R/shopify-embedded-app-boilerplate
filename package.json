@@ -17,7 +17,13 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "start": "node dist/server/main"
+    "start": "node dist/server/main",
+    "ngrok:dev": "ngrok http --domain=embedded-app.ngrok.dev 5173",
+    "ngrok:prod": "ngrok http --domain=embedded-app.ngrok.dev 3000",
+    "shopify:link": "shopify app config link",
+    "shopify:push": "shopify app config push",
+    "shopify:dev": "shopify app dev",
+    "shopify:deploy": "shopify app deploy"
   },
   "devDependencies": {
     "@shopify/app": "^3.58.2",

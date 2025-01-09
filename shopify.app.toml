@@ -1,6 +1,6 @@
-# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+# Learn more about configuring your app at https://shopify.dev/docs/apps/build/cli-for-apps/app-configuration
 
-client_id = "e24baf1389eae699ef45d918a037961c"
+client_id = ""
 name = "embedded-app-boilerplate"
 handle = "embedded-app-boilerplate-1"
 application_url = "https://embedded-app.ngrok.dev/"
@@ -14,7 +14,7 @@ include_config_on_deploy = true
 direct_api_mode = "online"
 
 [access_scopes]
-# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+# Learn more at https://shopify.dev/docs/api/usage/access-scopes
 scopes = "read_themes"
 
 [auth]
@@ -23,9 +23,11 @@ redirect_urls = [ "https://embedded-app.ngrok.dev/api/auth/callback" ]
 [webhooks]
 api_version = "2025-01"
 
-  [[webhooks.subscriptions]]
-  uri = "/api/webhooks"
-  compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
+[[webhooks.subscriptions]]
+# Learn more at https://shopify.dev/docs/api/admin-graphql/2025-01/enums/webhooksubscriptiontopic
+topics=["app/uninstalled"]
+uri = "/api/webhooks"
+compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
 
 [pos]
 embedded = false
